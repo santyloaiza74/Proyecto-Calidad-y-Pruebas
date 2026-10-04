@@ -1,0 +1,31 @@
+{
+  "name": "Proyecto I",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^30.5.2"
+  },
+  "dependencies": {
+    "jest-html-reporter": "^4.4.2"
+  },
+  "jest": {
+    "reporters": [
+      "default",
+      [
+        "jest-html-reporter",
+        {
+          "pageTitle": "Reporte de pruebas",
+          "outputPath": "build/reports/jest-report.html",
+          "includeFailureMsg": true
+        }
+      ]
+    ]
+  }
+}

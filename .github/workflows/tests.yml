@@ -1,0 +1,37 @@
+name: Jest Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Run Jest Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t jest-test .
+
+      - name: Run Jest tests
+        run: docker run --name jest-test-container jest-test
+
+      - name: Copy test report
+        if: always()
+        run: |
+          mkdir -p test-report
+          docker cp jest-test-container:/app/build/reports/. test-report/
+
+      - name: Upload test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jest-test-report
+          path: test-report

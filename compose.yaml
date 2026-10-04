@@ -1,0 +1,7 @@
+services:
+  tests:
+    build: .
+    container_name: junit-test
+    volumes:
+      - ./build/reports:/app/build/reports
+    command: sh -c "mkdir -p /app/build/reports && pnpm test"
